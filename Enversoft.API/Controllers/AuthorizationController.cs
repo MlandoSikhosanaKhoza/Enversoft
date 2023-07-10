@@ -25,7 +25,7 @@ namespace Enversoft.API.Controllers
         }
 
         /// <summary>
-        /// You can only login as a customer
+        /// You can only login as an admin
         /// </summary>
         /// <param name="Input"></param>
         /// <returns></returns>
