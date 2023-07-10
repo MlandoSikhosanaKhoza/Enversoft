@@ -11,4 +11,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Enversoft.BusinessLogic\Enversoft.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Enversoft.DAL\Enversoft.DAL.csproj" />
+    <ProjectReference Include="..\Enversoft.Shared\Enversoft.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

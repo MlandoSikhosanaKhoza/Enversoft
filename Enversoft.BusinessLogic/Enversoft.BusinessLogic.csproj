@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Enversoft.DAL\Enversoft.DAL.csproj" />
+    <ProjectReference Include="..\Enversoft.Shared\Enversoft.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
