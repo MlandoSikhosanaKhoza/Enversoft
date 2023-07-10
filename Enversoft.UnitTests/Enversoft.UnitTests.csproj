@@ -22,4 +22,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Enversoft.API\Enversoft.API.csproj" />
+    <ProjectReference Include="..\Enversoft.BusinessLogic\Enversoft.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Enversoft.Shared\Enversoft.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

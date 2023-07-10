@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Enversoft.BusinessLogic;
 using Enversoft.Shared;
-using Enversoft.Shared;
 using System.Data;
 
 namespace Enversoft.API.Controllers
