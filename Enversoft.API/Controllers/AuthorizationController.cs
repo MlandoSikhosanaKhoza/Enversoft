@@ -1,0 +1,39 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Enversoft.BusinessLogic;
+using Enversoft.Shared;
+
+namespace Enversoft.API.Controllers
+{
+    [Route("api/[controller][action]")]
+    [ApiController]
+    public class AuthorizationController : ControllerBase
+    {
+        private readonly IAuthorizationLogic _authorizationLogic;
+        public AuthorizationController(IAuthorizationLogic authorizationLogic) { 
+            _authorizationLogic = authorizationLogic;
+        }
+        /// <summary>
+        /// You can only login as a customer
+        /// </summary>
+        /// <param name="Input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Produces("application/json",Type=typeof(LoginResult))]
+        public IActionResult _Login(MobileLoginInputModel Input) {
+            return Ok(_authorizationLogic.Login(Input.MobileNumber));
+        }
+
+        /// <summary>
+        /// You can only login as a customer
+        /// </summary>
+        /// <param name="Input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Produces("application/json", Type = typeof(LoginResult))]
+        public IActionResult _LoginAsAdmin()
+        {
+            return Ok(_authorizationLogic.LoginAsAdmin());
+        }
+    }
+}
