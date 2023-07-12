@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -15,6 +15,10 @@
     <ProjectReference Include="..\Enversoft.BusinessLogic\Enversoft.BusinessLogic.csproj" />
     <ProjectReference Include="..\Enversoft.DAL\Enversoft.DAL.csproj" />
     <ProjectReference Include="..\Enversoft.Shared\Enversoft.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>

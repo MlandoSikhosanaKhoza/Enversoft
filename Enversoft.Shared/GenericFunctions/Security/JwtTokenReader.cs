@@ -17,6 +17,12 @@ namespace Enversoft.Shared
             string tokenValue = token.Claims.Where(c => c.Type.Equals(TokenField)).FirstOrDefault().Value;
             return tokenValue;
         }
+        //Read JWT Token from 
+        public static JwtSecurityToken GetJwtToken(string JwtToken)
+        {
+            JwtSecurityToken token = (JwtSecurityToken)new JwtSecurityTokenHandler().ReadJwtToken(JwtToken);
+            return token;
+        }
         //Read a JWT Token
         public static string GetTokenValue(IHttpContextAccessor ContextAccessor, string TokenField)
         {
