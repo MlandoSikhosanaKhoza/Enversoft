@@ -17,6 +17,10 @@ public partial class OrderItem
 
     public decimal Price { get; set; }
 
+    public int? QuantityReserved { get; set; }
+
+    public int? QuantityPacked { get; set; }
+
     public virtual Item Item { get; set; }
 
     public virtual Order Order { get; set; }

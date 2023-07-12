@@ -25,6 +25,14 @@ public partial class Order
 
     public decimal GrandTotal { get; set; }
 
+    public int? WarehouseId { get; set; }
+
+    public string DeliveryAddress { get; set; }
+
+    public double? Latitude { get; set; }
+
+    public double? Longitude { get; set; }
+
     public virtual Customer Customer { get; set; }
 
     public virtual Employee Employee { get; set; }

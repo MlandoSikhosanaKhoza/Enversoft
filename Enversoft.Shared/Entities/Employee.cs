@@ -15,5 +15,9 @@ public partial class Employee
 
     public bool IsDeleted { get; set; }
 
+    public string Role { get; set; }
+
+    public string AccessCode { get; set; }
+
     public virtual ICollection<Order> Order { get; set; } = new List<Order>();
 }
