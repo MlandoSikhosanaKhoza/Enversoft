@@ -49,6 +49,7 @@ namespace Enversoft.UnitTests
             //Assert
             count.Should().Be(3);
         }
+        
         [Fact]
         public void SupplierRepository_GetSuppliers_ReturnCount()
         {
@@ -59,6 +60,22 @@ namespace Enversoft.UnitTests
             count = _dbContext.Supplier.Count();
             //Assert
             count.Should().Be(2);
+        }
+
+        [Theory]
+        [InlineData("frog",1)]
+        [InlineData("Frog",1)]
+        [InlineData("o",2)]
+        [InlineData("I'm not in the list",0)]
+        public void SupplierRepository_SearchSuppliers_ReturnExpected(string Search,int ExpectedCount)
+        {
+            //Arrange
+            int count = 0;
+            //Act
+            List<Supplier> suppliers = _supplierRepository.SearchSuppliers(Search);
+            count = suppliers.Count();
+            //Assert
+            count.Should().Be(ExpectedCount);
         }
     }
 }

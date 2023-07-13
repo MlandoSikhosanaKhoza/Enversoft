@@ -23,7 +23,7 @@ namespace Enversoft.DAL
 
         public List<Supplier> SearchSuppliers(string Name)
         {
-            return _repository.Get(s => s.Name.Contains(Name)).ToList();
+            return _repository.Get(s => s.Name.ToLower().Contains(Name.ToLower())).ToList();
         }
 
         public bool DeleteSupplier(Supplier SupplierObject)
