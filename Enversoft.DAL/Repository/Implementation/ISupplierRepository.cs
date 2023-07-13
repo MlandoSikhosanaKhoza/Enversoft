@@ -10,6 +10,7 @@ namespace Enversoft.DAL
     public interface ISupplierRepository
     {
         List<Supplier> GetSuppliers();
+        List<Supplier> SearchSuppliers(string Name);
         bool DeleteSupplier(Supplier SupplierObject);
         bool UpdateSupplier(Supplier SupplierObject);
         Supplier AddSupplier(Supplier SupplierObject);
