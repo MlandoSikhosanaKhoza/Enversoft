@@ -25,6 +25,6 @@ namespace Enversoft.DAL
         TEntity Insert(TEntity entity);
         bool Update(TEntity entity);
         bool Delete(TEntity entity);
-
+        bool DeleteById(object Id);
     }
 }
