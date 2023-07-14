@@ -11,27 +11,24 @@ namespace Enversoft.BusinessLogic
 {
     public class ItemLogic:IItemLogic
     {
-        private GenericRepository<Item> ItemRepository { get; set; }
-        private IUnitOfWork _unitOfWork;
+        private IItemRepository _itemRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ItemLogic(IUnitOfWork UnitOfWork,IWebHostEnvironment webHostEnvironment)
+        public ItemLogic(IItemRepository itemRepository,IWebHostEnvironment webHostEnvironment)
         {
-            _unitOfWork = UnitOfWork;
-            ItemRepository = UnitOfWork.GetRepository<Item>();
+            _itemRepository = itemRepository;
             _webHostEnvironment = webHostEnvironment;
         }
 
         public List<Item> GetAllItems()
         {
-            return ItemRepository.Get(e => !e.IsDeleted).ToList();
+            return _itemRepository.GetAllItems();
         }
 
 
         public Item AddItem(ItemInputModel ItemToAdd)
         {
             string path = StoreByteArrayFromBase64.Execute(ItemToAdd.Base64, $"{_webHostEnvironment.WebRootPath}/Images/", Path.GetExtension(ItemToAdd.ImageName));
-            Item itemAdded = ItemRepository.Insert(new Item { ImageName=Path.GetFileName(path), Description=ItemToAdd.Description, Price=ItemToAdd.Price,IsDeleted=false});
-            _unitOfWork.SaveChanges();
+            Item itemAdded = _itemRepository.AddItem(new Item { ImageName=Path.GetFileName(path), Description=ItemToAdd.Description, Price=ItemToAdd.Price,IsDeleted=false});
             return itemAdded;
         }
 
@@ -54,7 +51,7 @@ namespace Enversoft.BusinessLogic
 
         public Item GetItem(int ItemId)
         {
-            return ItemRepository.GetById(ItemId);
+            return _itemRepository.GetItem(ItemId);
         }
 
         public bool UpdateItem(ItemInputModel ItemToUpdate)
@@ -73,19 +70,13 @@ namespace Enversoft.BusinessLogic
                 item.ImageName = imageName;
             }
 
-            ItemRepository.Update(item);
-            
-            _unitOfWork.SaveChanges();
+            _itemRepository.UpdateItem(item);
             return true;
         }
 
         public bool DeleteItem(int ItemId)
         {
-            Item item = ItemRepository.GetById(ItemId);
-            item.IsDeleted = true;
-            ItemRepository.Update(item);
-            _unitOfWork.SaveChanges();
-            return true;
+            return _itemRepository.DeleteItem(ItemId);
         }
     }
 }

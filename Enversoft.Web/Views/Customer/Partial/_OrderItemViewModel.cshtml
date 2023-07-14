@@ -1,64 +1,79 @@
 ﻿@model IEnumerable<OrderItemsViewModel>
-    
+<div id="map-tab" class="d-none">
+    <input type="text" id="txt-search-address" name="Search" form="somerandoform"/>
+    <input type="submit" form="somerandoform" class="btn" value="Search" id="btn-search-address"/>
+    <input type="hidden" id="hid-address" name="DeliveryAddress" form="form-purchase" />
+    <input type="hidden" id="hid-lat" name="Latitude" form="form-purchase" />
+    <input type="hidden" id="hid-lon" name="Longitude" form="form-purchase" />
+    <div id="div-display-area"></div>
+    <div id="myMap" style='position:relative;width:100%;height:300px;'></div>
+</div>
+
+<div id="shop-tab">
     <div class="bg-dark p-0 text-white">
         <span id="btn-close-shopping-cart" class="ml-auto" style="margin-right: 0;cursor: pointer;">&times;</span>
         <h3>Shopping Cart</h3>
     </div>
 
-<table id="my-orders" class="table small">
-    <thead>
+    <table id="my-orders" class="table small">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id=item.ItemId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="col-sm-12 table bg-dark text-white">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
+            <th>Subtotal</th>
+            <th>VAT</th>
+            <th>Grand Total</th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+            <td id="sub-total">
+                R0,00
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
+            <td id="purchase-vat">
+                @(Tax.VAT * 100)%
+                <input type="hidden" value="@Tax.VAT" id="input-vat" />
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id=item.ItemId })
+            <td id="grand-total">
+                R0,00
             </td>
         </tr>
-}
-    </tbody>
-</table>
-<table class="col-sm-12 table bg-dark text-white">
-    <tr>
-        <th>Subtotal</th>
-        <th>VAT</th>
-        <th>Grand Total</th>
-    </tr>
-    <tr>
-        <td id="sub-total">
-            R0,00
-        </td>
-        <td id="purchase-vat">
-            @(Tax.VAT*100)%
-            <input type="hidden" value="@Tax.VAT" id="input-vat" />
-        </td>
-        <td id="grand-total">
-            R0,00
-        </td>
-    </tr>
-</table>
-<div id="cart-storage"></div>
-<div class="justify-content-end">
-    <button id="btn-cms" disabled class="btn btn-primary pull-right">Confirm your order</button>
+    </table>
+    <div id="cart-storage"></div>
+</div>
+    
+<div class="">
+    <button id="btn-gb" type="button" class="btn bg-info d-none">Go back to Shopping Cart</button>
+    <button id="btn-gtm" type="button" class="btn bg-info" disabled>Proceed to Delivery</button>
+    <button id="btn-cms" class="btn bg-success d-none" form="form-purchase" disabled>Confirm your order</button>
 </div>

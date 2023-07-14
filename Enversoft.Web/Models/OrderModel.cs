@@ -15,9 +15,12 @@ namespace Enversoft.Web.Models
         public decimal VAT { get; set; } = Tax.VAT;
         public decimal Subtotal { get; set; }
         public decimal GrandTotal { get; set; }
-
+        public string DeliveryAddress { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public List<Item> Items { get; set; }
         public List<OrderItemsViewModel> OrderItemsView { get; set; }
+
     }
     public class OrderItemsViewModel : OrderItem
     {

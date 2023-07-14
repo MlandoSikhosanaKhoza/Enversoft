@@ -8,7 +8,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
+    <link href="~/image/front/enversoft_xsmall.jpg" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -51,6 +51,7 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <li><a href="@Url.Action("Index","Item")" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Items</span></a></li>
+                    <li><a href="@Url.Action("Index","Supplier")" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Companies</span></a></li>
                     <li><a href="@Url.Action("Index","Employee")" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Employees</span></a></li>
                     <li><a href="@Url.Action("Index","OrderStats")" class="nav-link scrollto"><i class="bx bi-cart-check"></i> <span>Order Stats</span></a></li>
                     <li><a href="@Url.Action("Index","Order")" class="nav-link scrollto"><i class="bx bi-cart-fill"></i> <span>Orders</span></a></li>

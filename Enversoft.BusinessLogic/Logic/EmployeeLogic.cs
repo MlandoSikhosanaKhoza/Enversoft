@@ -9,45 +9,35 @@ namespace Enversoft.BusinessLogic
 {
     public class EmployeeLogic:IEmployeeLogic
     {
-        private GenericRepository<Employee> EmployeeRepository { get; set; }
-        private IUnitOfWork _unitOfWork;
-        public EmployeeLogic(IUnitOfWork UnitOfWork)
+        private IEmployeeRepository _employeeRepository;
+        public EmployeeLogic(IEmployeeRepository employeeRepository)
         {
-            _unitOfWork = UnitOfWork;
-            EmployeeRepository = UnitOfWork.GetRepository<Employee>();
+            _employeeRepository=employeeRepository;
         }
 
         public List<Employee> GetAllEmployees()
         {
-            return EmployeeRepository.Get(e => !e.IsDeleted).ToList();
+            return _employeeRepository.GetAllEmployees();
         }
 
         public Employee AddEmployee(Employee Employee)
         {
-            Employee employee=EmployeeRepository.Insert(Employee);
-            _unitOfWork.SaveChanges();
-            return employee;
+            return _employeeRepository.AddEmployee(Employee);
         }
 
         public Employee GetEmployee(int EmployeeId)
         {
-            return EmployeeRepository.GetById(EmployeeId);
+            return _employeeRepository.GetEmployee(EmployeeId);
         }
 
         public bool UpdateEmployee(Employee Employee)
         {
-            EmployeeRepository.Update(Employee);
-            _unitOfWork.SaveChanges();
-            return true;
+            return _employeeRepository.UpdateEmployee(Employee);
         }
 
         public bool DeleteEmployee(int EmployeeId)
         {
-            Employee employee = GetEmployee(EmployeeId);
-            employee.IsDeleted = true;
-            UpdateEmployee(employee);
-            _unitOfWork.SaveChanges();
-            return true;
+            return _employeeRepository.DeleteEmployee(EmployeeId);
         }
     }
 }

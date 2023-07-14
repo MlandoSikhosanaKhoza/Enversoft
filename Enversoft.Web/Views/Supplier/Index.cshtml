@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Enversoft.Shared.Supplier>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<section id="contact" class="contact p-3 pt-0 mb-3 bg-white @(!User.IsInRole("Customer")?"":"d-none")">
+    <div class="section-title">
+        <h2>Companies</h2>
+        <form method="get">
+            <input type="text" name="Search" placeholder="Search" />
+        </form>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SupplierId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telephone)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SupplierId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telephone)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id=item.SupplierId }) 
+                            
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+

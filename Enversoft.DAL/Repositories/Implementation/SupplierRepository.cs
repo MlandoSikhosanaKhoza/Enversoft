@@ -21,6 +21,11 @@ namespace Enversoft.DAL
             return _repository.GetAll().ToList();
         }
 
+        public Supplier GetSupplierById(int SupplierId)
+        {
+            return _repository.GetById(SupplierId);
+        }
+
         public List<Supplier> SearchSuppliers(string Name)
         {
             return _repository.Get(s => s.Name.ToLower().Contains(Name.ToLower())).ToList();

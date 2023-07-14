@@ -74,7 +74,7 @@ namespace Enversoft.Web.Controllers
             Customer customer = await _shopWorldClient.Customer_ConfigureCustomerAsync(_mapper.Map<Customer>(CustomerModel));
             ViewBag.NameSurname = customer.Name + " " + customer.Surname;
             OrderModel.CustomerId = customer.CustomerId;
-           
+            
             if (!User.IsInRole("Customer"))
             {
                 LoginResult loginResult = await _shopWorldClient.Authorization_LoginAsync(new MobileLoginInputModel { MobileNumber = customer.Mobile });

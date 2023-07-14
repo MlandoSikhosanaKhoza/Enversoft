@@ -9,75 +9,50 @@ namespace Enversoft.BusinessLogic
 {
     public class CustomerLogic:ICustomerLogic
     {
-        private GenericRepository<Customer> CustomerRepository { get; set; }
+        private ICustomerRepository _customerRepository { get; set; }
         private IUnitOfWork _unitOfWork;
-        public CustomerLogic(IUnitOfWork UnitOfWork)
+        public CustomerLogic(ICustomerRepository customerRepository)
         {
-            _unitOfWork = UnitOfWork;
-            CustomerRepository = UnitOfWork.GetRepository<Customer>();
+            _customerRepository = customerRepository;
         }
         public List<Customer> GetAllCustomers()
         {
-            return CustomerRepository.GetAll().ToList();
+            return _customerRepository.GetAllCustomers();
         }
 
         public List<Customer> SearchForCustomers(string Search)
         {
-            Search = Search.ToLower();
-            return (CustomerRepository.Get(s => s.Name.ToLower().Contains(Search) ||
-                 s.Surname.ToLower().Contains(Search))).ToList();
+            return _customerRepository.SearchForCustomers(Search);
         }
         public bool MobileNumberExists(string Mobile)
         {
-            if (string.IsNullOrEmpty(Mobile))
-            {
-                return false;
-            }
-            return CustomerRepository.Get(u => u.Mobile.Equals(Mobile)).Any();
+            return _customerRepository.MobileNumberExists( Mobile);
         }
         public Customer AddCustomer(Customer Customer)
         {
-            Customer customer=CustomerRepository.Insert(Customer);
-            _unitOfWork.SaveChanges();
-            return customer;
+            return _customerRepository.AddCustomer(Customer);
         }
         public bool UpdateCustomer(Customer Customer)
         {
-            CustomerRepository.Update(Customer);
-            _unitOfWork.SaveChanges();
-            return true;
+            return _customerRepository.UpdateCustomer(Customer);
         }
         public bool DeleteCustomer(int CustomerId)
         {
-            CustomerRepository.DeleteById(CustomerId);
-            _unitOfWork.SaveChanges();
-            return true;
+            return _customerRepository.DeleteCustomer(CustomerId);
         }
         public Customer GetCustomer(int CustomerId)
         {
-            return CustomerRepository.GetById(CustomerId);
+            return _customerRepository.GetCustomer(CustomerId);
         }
 
         public Customer GetCustomerByMobileNumber(string MobileNumber)
         {
-            Customer customer = CustomerRepository.Get(c => c.Mobile.Equals(MobileNumber)).FirstOrDefault();
-            return customer;
+            return _customerRepository.GetCustomerByMobileNumber(MobileNumber);
         }
 
         public Customer ConfigureCustomer(Customer Customer)
         {
-            Customer customer = GetCustomerByMobileNumber(Customer.Mobile);
-            if (customer==null)
-            {
-                customer = AddCustomer(Customer);
-            }
-            else
-            {
-                customer.Name = Customer.Name;
-                customer.Surname = Customer.Surname;
-                UpdateCustomer(customer);
-            }
-            return customer;
+            return _customerRepository.ConfigureCustomer(Customer);
         }
     }
 }

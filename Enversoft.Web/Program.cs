@@ -14,6 +14,7 @@ builder.Services.AddScoped<EnversoftClient>();
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(typeof(CustomerProfiler));
+    mc.AddProfile(typeof(SupplierProfiler));
     mc.AddProfile(typeof(ItemProfiler));
     mc.AddProfile(typeof(OrderProfiler));
     mc.AddProfile(typeof(EmployeeProfile));

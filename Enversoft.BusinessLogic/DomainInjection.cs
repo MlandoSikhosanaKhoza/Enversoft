@@ -22,6 +22,12 @@ namespace Enversoft.BusinessLogic
             Services.AddScoped<IWarehouseRepository,WarehouseRepository>();
             Services.AddScoped<ISupplierRepository, SupplierRepository>();
             Services.AddScoped<ILogisticsRepository, LogisticsRepository>();
+
+            Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            Services.AddScoped<IItemRepository, ItemRepository>();
+            Services.AddScoped<IOrderRepository, OrderRepository>();
+            Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             #endregion Repository
 
             #region Business Logic
@@ -30,6 +36,7 @@ namespace Enversoft.BusinessLogic
             Services.AddScoped<ICustomerLogic, CustomerLogic>();
             Services.AddScoped<IItemLogic, ItemLogic>();
             Services.AddScoped<IOrderLogic, OrderLogic>();
+            Services.AddScoped<ISupplierLogic, SupplierLogic>();
             Services.AddScoped<IOrderItemLogic, OrderItemLogic>();
             #endregion Business Logic
             
